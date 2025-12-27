@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 Shopify AI Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 900px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .status-bar {
+            background: #f8fafc;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.warning {
+            background: #f59e0b;
+        }
+
+        .status-dot.error {
+            background: #ef4444;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .question-section {
+            margin-bottom: 40px;
+        }
+
+        .question-section h2 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-input {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: all 0.3s;
+        }
+
+        .question-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .question-input::placeholder {
+            color: #94a3b8;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4338ca;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .example-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .example-btn {
+            padding: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .example-btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        .response-section {
+            margin-top: 40px;
+        }
+
+        .response-section h2 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .response-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 30px;
+            min-height: 200px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .response-placeholder {
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+        }
+
+        .response-content {
+            display: none;
+        }
+
+        .answer {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #1e293b;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .metadata {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .meta-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .meta-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: #1e293b;
+            word-break: break-word;
+        }
+
+        .confidence-high {
+            color: #10b981;
+        }
+
+        .confidence-medium {
+            color: #f59e0b;
+        }
+
+        .confidence-low {
+            color: #ef4444;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 25px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-robot"></i> Shopify AI Analytics</h1>
+            <p>Ask natural language questions about your store data. Get AI-powered insights instantly.</p>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-dot" id="api-status"></div>
+                <span>API Gateway: <span id="api-status-text">Checking...</span></span>
+            </div>
+            <div class="status-item">
+                <div class="status-dot" id="ai-status"></div>
+                <span>AI Agent: <span id="ai-status-text">Checking...</span></span>
+            </div>
+            <div class="status-item">
+                <div class="status-dot" id="data-status"></div>
+                <span>Data Source: <span id="data-status-text">Checking...</span></span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="question-section">
+                <h2><i class="fas fa-question-circle"></i> What would you like to know?</h2>
+                <textarea 
+                    id="questionInput" 
+                    class="question-input" 
+                    placeholder="Example: What were my top 5 selling products last week? 
+Or: How much inventory should I reorder for next month? 
+Or: Which customers placed repeat orders in the last 90 days?"
+                ></textarea>
+                
+                <div class="actions">
+                    <div>
+                        <button class="btn btn-primary" onclick="askQuestion()">
+                            <i class="fas fa-paper-plane"></i> Ask AI
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearQuestion()">
+                            <i class="fas fa-eraser"></i> Clear
+                        </button>
+                    </div>
+                    <button class="btn btn-secondary" onclick="checkServices()">
+                        <i class="fas fa-sync-alt"></i> Check Services
+                    </button>
+                </div>
+
+                <h3 style="margin-top: 30px; color: #64748b; font-size: 1rem;">
+                    <i class="fas fa-lightbulb"></i> Try these example questions:
+                </h3>
+                <div class="example-questions">
+                    <button class="example-btn" onclick="useExample('What were my sales last week?')">
+                        <i class="fas fa-chart-line"></i> What were my sales last week?
+                    </button>
+                    <button class="example-btn" onclick="useExample('Which products are low in stock?')">
+                        <i class="fas fa-boxes"></i> Which products are low in stock?
+                    </button>
+                    <button class="example-btn" onclick="useExample('What were my top 5 products last month?')">
+                        <i class="fas fa-trophy"></i> What were my top 5 products last month?
+                    </button>
+                    <button class="example-btn" onclick="useExample('How much inventory should I reorder?')">
+                        <i class="fas fa-truck-loading"></i> How much inventory should I reorder?
+                    </button>
+                </div>
+            </div>
+
+            <div class="response-section">
+                <h2><i class="fas fa-comment-dots"></i> AI Response</h2>
+                <div class="response-box">
+                    <div class="response-placeholder" id="responsePlaceholder">
+                        <i class="fas fa-robot" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.5;"></i>
+                        <p>Your AI-generated answer will appear here...</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">Ask a question to get started!</p>
+                    </div>
+                    
+                    <div class="response-content" id="responseContent">
+                        <div class="answer" id="answerText"></div>
+                        
+                        <div class="metadata">
+                            <div class="meta-item">
+                                <span class="meta-label">Confidence</span>
+                                <span class="meta-value" id="confidenceValue"></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Data Source</span>
+                                <span class="meta-value" id="dataSourceValue"></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Processing Time</span>
+                                <span class="meta-value" id="processingTimeValue"></span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Query Type</span>
+                                <span class="meta-value" id="queryTypeValue"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="spinner" id="loadingSpinner"></div>
+                </div>
+                
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🚀 <strong>Shopify AI Analytics</strong> | AI-powered insights for your Shopify store</p>
+            <p style="margin-top: 8px; font-size: 0.8rem;">
+                System Architecture: Frontend → API Gateway → AI Agent → Mock Shopify API
+            </p>
+            <p style="margin-top: 8px; font-size: 0.8rem; color: #94a3b8;">
+                Deployed on Render.com | Using OpenAI GPT | Ready for real Shopify integration
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration - UPDATE THIS URL with your Render API Gateway URL
+        const API_BASE_URL = "https://shopify-ai-main-api.onrender.com";
+        const API_ENDPOINT = `${API_BASE_URL}/api/v1/questions`;
+        
+        // DOM Elements
+        const questionInput = document.getElementById('questionInput');
+        const responsePlaceholder = document.getElementById('responsePlaceholder');
+        const responseContent = document.getElementById('responseContent');
+        const answerText = document.getElementById('answerText');
+        const confidenceValue = document.getElementById('confidenceValue');
+        const dataSourceValue = document.getElementById('dataSourceValue');
+        const processingTimeValue = document.getElementById('processingTimeValue');
+        const queryTypeValue = document.getElementById('queryTypeValue');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Status elements
+        const apiStatusDot = document.getElementById('api-status');
+        const apiStatusText = document.getElementById('api-status-text');
+        const aiStatusDot = document.getElementById('ai-status');
+        const aiStatusText = document.getElementById('ai-status-text');
+        const dataStatusDot = document.getElementById('data-status');
+        const dataStatusText = document.getElementById('data-status-text');
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServices();
+        });
+        
+        // Use example question
+        function useExample(question) {
+            questionInput.value = question;
+            questionInput.focus();
+        }
+        
+        // Clear question
+        function clearQuestion() {
+            questionInput.value = '';
+            responseContent.style.display = 'none';
+            responsePlaceholder.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+        
+        // Check service status
+        async function checkServices() {
+            updateStatus(apiStatusDot, apiStatusText, 'checking', 'Checking...');
+            updateStatus(aiStatusDot, aiStatusText, 'checking', 'Checking...');
+            updateStatus(dataStatusDot, dataStatusText, 'checking', 'Checking...');
+            
+            try {
+                // Check API Gateway
+                const apiResponse = await fetch(`${API_BASE_URL}/health`, { timeout: 5000 });
+                if (apiResponse.ok) {
+                    updateStatus(apiStatusDot, apiStatusText, 'healthy', 'Healthy');
+                } else {
+                    updateStatus(apiStatusDot, apiStatusText, 'error', 'Unhealthy');
+                }
+                
+                // Check AI Agent (via API Gateway status endpoint)
+                const statusResponse = await fetch(`${API_BASE_URL}/api/v1/status`);
+                if (statusResponse.ok) {
+                    const statusData = await statusResponse.json();
+                    
+                    if (statusData.ai_agent.status === 'healthy') {
+                        updateStatus(aiStatusDot, aiStatusText, 'healthy', 'Healthy');
+                    } else {
+                        updateStatus(aiStatusDot, aiStatusText, 'warning', 'Limited');
+                    }
+                    
+                    if (statusData.mock_shopify.status === 'healthy') {
+                        updateStatus(dataStatusDot, dataStatusText, 'healthy', 'Mock Data');
+                    } else {
+                        updateStatus(dataStatusDot, dataStatusText, 'warning', 'Fallback Data');
+                    }
+                }
+                
+            } catch (error) {
+                updateStatus(apiStatusDot, apiStatusText, 'error', 'Offline');
+                updateStatus(aiStatusDot, aiStatusText, 'error', 'Offline');
+                updateStatus(dataStatusDot, dataStatusText, 'error', 'Offline');
+                console.error('Error checking services:', error);
+            }
+        }
+        
+        // Update status indicator
+        function updateStatus(dotElement, textElement, status, message) {
+            dotElement.className = 'status-dot';
+            dotElement.classList.add(status === 'healthy' ? '' : 
+                                   status === 'warning' ? 'warning' : 'error');
+            
+            textElement.textContent = message;
+        }
+        
+        // Main function to ask question
+        async function askQuestion() {
+            const question = questionInput.value.trim();
+            
+            if (!question) {
+                showError('Please enter a question first.');
+                return;
+            }
+            
+            // Show loading state
+            loadingSpinner.style.display = 'block';
+            responsePlaceholder.style.display = 'none';
+            responseContent.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        store_id: "test.myshopify.com",
+                        question: question,
+                        access_token: null
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Display the response
+                displayResponse(data);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                showError(`Failed to get answer: ${error.message}. Please check if services are running.`);
+                
+                // Show fallback mock response
+                displayResponse({
+                    answer: `Based on your store data: ${question}. The AI analysis shows positive trends. (Note: Using fallback data as AI service may be unavailable)`,
+                    confidence: "medium",
+                    data_source: "fallback_mock",
+                    processing_time: 0.5,
+                    query_used: "SELECT * FROM orders LIMIT 10"
+                });
+                
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        }
+        
+        // Display response
+        function displayResponse(data) {
+            answerText.textContent = data.answer;
+            
+            // Set confidence with color coding
+            confidenceValue.textContent = data.confidence.toUpperCase();
+            confidenceValue.className = 'meta-value';
+            confidenceValue.classList.add(`confidence-${data.confidence}`);
+            
+            dataSourceValue.textContent = data.data_source.replace(/_/g, ' ');
+            processingTimeValue.textContent = `${data.processing_time.toFixed(2)} seconds`;
+            
+            // Extract query type from query_used if available
+            if (data.query_used) {
+                const query = data.query_used.toLowerCase();
+                if (query.includes('inventory')) {
+                    queryTypeValue.textContent = 'Inventory Analysis';
+                } else if (query.includes('sales') || query.includes('revenue')) {
+                    queryTypeValue.textContent = 'Sales Analysis';
+                } else if (query.includes('product')) {
+                    queryTypeValue.textContent = 'Product Analysis';
+                } else if (query.includes('customer')) {
+                    queryTypeValue.textContent = 'Customer Analysis';
+                } else {
+                    queryTypeValue.textContent = 'General Query';
+                }
+            } else {
+                queryTypeValue.textContent = 'AI Generated';
+            }
+            
+            // Show response
+            responsePlaceholder.style.display = 'none';
+            responseContent.style.display = 'block';
+        }
+        
+        // Show error
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+        
+        // Allow Enter key to submit (with Shift+Enter for new line)
+        questionInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                askQuestion();
+            }
+        });
+    </script>
+</body>
+</html>
