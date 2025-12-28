@@ -1,4 +1,4 @@
-## Shopify AI Analytics App
+## SHOPIFY AI ANALYTICS APP
 
 ---
 
@@ -314,9 +314,9 @@ docker run -p 8000:8000 shopify-ai-analytics"
 
 ## Working Model
 
-# Shopify Test Dashboards
+### Shopify Test Dashboards
 
-### 1.
+#### 1.
 <img width="1047" height="792" alt="image" src="https://github.com/user-attachments/assets/9a7ada89-a2b1-41a1-9d64-a220d764ee46" />
 
 ---
@@ -434,6 +434,7 @@ This project successfully demonstrates a complete AI-powered analytics platform 
 The system is production-ready with mock layers that can be directly swapped for real implementations, demonstrating both technical skill and strategic planning for scalability.
 
 ---
+
 
 
 
