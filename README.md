@@ -314,27 +314,41 @@ docker run -p 8000:8000 shopify-ai-analytics"
 
 ## Working Model
 
-Shopify Test Dashboards
-1.
+# Shopify Test Dashboards
+
+### 1.
 <img width="1047" height="792" alt="image" src="https://github.com/user-attachments/assets/9a7ada89-a2b1-41a1-9d64-a220d764ee46" />
 
-2.
+---
+
+### 2.
 <img width="979" height="830" alt="image" src="https://github.com/user-attachments/assets/4fb1a42c-6aeb-431a-b244-6ad1c2dc13f1" />
 
-3.
+---
+
+### 3.
 <img width="958" height="838" alt="image" src="https://github.com/user-attachments/assets/81ce8004-3989-4da7-956a-39928bc1ecab" />
 
-4.
+---
+
+### 4.
 <img width="954" height="841" alt="image" src="https://github.com/user-attachments/assets/424fc6e8-5e2f-4c31-9303-75021dd683cc" />
 
-5.
+---
+
+### 5.
 <img width="955" height="848" alt="image" src="https://github.com/user-attachments/assets/eab07215-57f5-4ef5-b1f7-3c00e8229bb8" />
 
+---
 
-Shopify Dashboard
+## Shopify Dashboard
+
 <img width="1777" height="844" alt="image" src="https://github.com/user-attachments/assets/870f6f00-0503-47ad-8829-7a7d373aa8d6" />
 
-Shopify Open AI Platform
+---
+
+## Shopify Open AI Platform
+
 <img width="1780" height="838" alt="image" src="https://github.com/user-attachments/assets/34874f73-d119-46c2-b43c-641a61753d14" />
 
 ---
@@ -420,6 +434,7 @@ This project successfully demonstrates a complete AI-powered analytics platform 
 The system is production-ready with mock layers that can be directly swapped for real implementations, demonstrating both technical skill and strategic planning for scalability.
 
 ---
+
 
 
 
