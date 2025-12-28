@@ -9,9 +9,13 @@ A fully functional AI-powered analytics application that connects natural langua
 
 ## 🏗️ System Architecture
 
+<img width="547" height="346" alt="image" src="https://github.com/user-attachments/assets/730ddd89-f584-4c43-ac57-e5c30c87b39a" />
+
 ---
 
 ## 📊 Architecture Diagram
+
+<img width="572" height="380" alt="image" src="https://github.com/user-attachments/assets/78edc462-219d-4355-a9af-63844bad200f" />
 
 ---
 
@@ -19,58 +23,58 @@ A fully functional AI-powered analytics application that connects natural langua
 
 ### 1. Rails-Compatible API Gateway (main_api/main.py)
    
-✅ REST endpoint: POST /api/v1/questions (simulates Rails controller)
+a) REST endpoint: POST /api/v1/questions (simulates Rails controller)
 
-✅ Request validation & routing
+b) Request validation & routing
 
-✅ Authentication-ready structure (OAuth slots prepared)
+c) Authentication-ready structure (OAuth slots prepared)
 
-✅ Production migration path to Rails controllers
+d) Production migration path to Rails controllers
 
-✅ Rails design patterns implemented in Python
+e) Rails design patterns implemented in Python
 
-✅ Port: 8000
+f) Port: 8000
 
 
 ### 2. Python AI Service with Real LLM (ai_agent/agent/agent.py)
    
-✅ Real OpenAI GPT-3.5 Turbo integration (not simulated)
+a) Real OpenAI GPT-3.5 Turbo integration (not simulated)
 
-✅ Dynamic ShopifyQL query generation from natural language
+b) Dynamic ShopifyQL query generation from natural language
 
-✅ Business-friendly answer generation
+c) Business-friendly answer generation
 
-✅ Full agentic workflow: Question → Intent → Query → Insight
+d) Full agentic workflow: Question → Intent → Query → Insight
 
-✅ Error handling & fallback mechanisms
+e) Error handling & fallback mechanisms
 
-✅ Port: 8001
+f) Port: 8001
 
 
 ### 3. Shopify Mock API (mock_shopify/shopify_mock.py)
 
-✅ Simulates Shopify Admin API responses
+a) Simulates Shopify Admin API responses
 
-✅ Structured inventory, sales, customer data
+b) Structured inventory, sales, customer data
 
-✅ Ready for real Shopify API integration
+c) Ready for real Shopify API integration
 
-✅ CORS configured for frontend access
+d) CORS configured for frontend access
 
-✅ Port: 8002
+e) Port: 8002
 
 
 ### 4. Frontend UI (frontend/index.html)
 
-✅ Clean, responsive interface
+a) Clean, responsive interface
 
-✅ Example questions with one-click prompts
+b) Example questions with one-click prompts
 
-✅ Real-time system status monitoring
+c) Real-time system status monitoring
 
-✅ Confidence indicators (High/Medium/Low)
+d) Confidence indicators (High/Medium/Low)
 
-✅ Technical details view (ShopifyQL queries, raw data)
+e) Technical details view (ShopifyQL queries, raw data)
 
 ---
 
@@ -78,11 +82,11 @@ A fully functional AI-powered analytics application that connects natural langua
 
 ### Prerequisites
 
-Python 3.8+
+1. Python 3.8+
 
-OpenAI API key
+2. OpenAI API key
 
-Git Bash (Windows) or Terminal (Mac/Linux)
+3. Git Bash (Windows) or Terminal (Mac/Linux)
 
 ---
 
@@ -178,17 +182,17 @@ chmod +x start_all.sh
 
 ## ✅ Core Concepts Demonstrated
 
-System design & API architecture - 3-tier microservices architecture
+1. System design & API architecture - 3-tier microservices architecture
 
-Python + LLM orchestration - Real OpenAI GPT-3.5 Turbo integration
+2. Python + LLM orchestration - Real OpenAI GPT-3.5 Turbo integration
 
-Agentic workflows - Question → AI → Query → Answer pipeline
+3. Agentic workflows - Question → AI → Query → Answer pipeline
 
-ShopifyQL understanding - AI generates valid ShopifyQL syntax
+4. ShopifyQL understanding - AI generates valid ShopifyQL syntax
 
-Practical problem-solving - Working prototype with clear migration path
+5. Practical problem-solving - Working prototype with clear migration path
 
-Rails API design - Rails-compatible gateway with production migration path
+6. Rails API design - Rails-compatible gateway with production migration path
 
 ---
 
@@ -196,19 +200,19 @@ Rails API design - Rails-compatible gateway with production migration path
 
 This prototype demonstrates all architectural patterns required for production. The following mock layers are ready for production swap:
 
-A PICTURE WILL BE HERE [SS]
+<img width="857" height="264" alt="image" src="https://github.com/user-attachments/assets/260d3df4-0c1f-4e2f-93d4-d964a199ac33" />
 
 ---
 
 ## 🗺️ Production Roadmap
 
-1: Convert gateway to Rails (Api::V1::QuestionsController)
+1. Convert gateway to Rails (Api::V1::QuestionsController)
 
-2: Implement Shopify OAuth flow with real authentication
+2. Implement Shopify OAuth flow with real authentication
 
-3: Connect to real Shopify Admin API
+3. Connect to real Shopify Admin API
 
-4: Deploy to production environment
+4. Deploy to production environment
 
 ---
 
@@ -216,71 +220,71 @@ A PICTURE WILL BE HERE [SS]
 
 ### 1. AI Agent Features:
 
-Two-step AI processing: Query generation + business answer
+a) Two-step AI processing: Query generation + business answer
 
-Fallback mechanisms: Graceful degradation on API errors
+b) Fallback mechanisms: Graceful degradation on API errors
 
-Confidence scoring: High/Medium/Low confidence indicators
+c) Confidence scoring: High/Medium/Low confidence indicators
 
-Query validation: Ensures valid ShopifyQL syntax
+d) Query validation: Ensures valid ShopifyQL syntax
 
 
 ### 2. API Gateway Features:
 
-Rails-compatible endpoints: /api/v1/questions
+a)Rails-compatible endpoints: /api/v1/questions
 
-Error handling: Consistent error responses
+b) Error handling: Consistent error responses
 
-Service orchestration: Coordinates between AI and data layers
+c) Service orchestration: Coordinates between AI and data layers
 
-CORS enabled: Frontend compatibility
+d) CORS enabled: Frontend compatibility
 
 
 ### 3. Frontend Features:
 
-Real-time monitoring: Service health checks
+a) Real-time monitoring: Service health checks
 
-User-friendly interface: Clean, intuitive design
+b) User-friendly interface: Clean, intuitive design
 
-Example prompts: Quick-start questions
+c) Example prompts: Quick-start questions
 
-Detailed views: Show/hide technical details
+d) Detailed views: Show/hide technical details
 
 ---
 
 ## 🔮 Future Enhancements
 
-### Production Implementation
+### 1. Production Implementation
 
-Full Rails API - Convert Python gateway to Ruby on Rails
+a) Full Rails API - Convert Python gateway to Ruby on Rails
 
-Shopify OAuth - Real store authentication with OAuth 2.0
+b) Shopify OAuth - Real store authentication with OAuth 2.0
 
-Real Shopify API - Live data integration with GraphQL
+c) Real Shopify API - Live data integration with GraphQL
 
-Advanced Analytics - Predictive insights, trend analysis
-
-
-#### Phase 3: Advanced Features
-
-Multi-store support - Manage multiple Shopify stores
-
-Custom reporting - Save and schedule reports
-
-Team collaboration - Share insights with team members
-
-Mobile app - iOS/Android companion apps
+d) Advanced Analytics - Predictive insights, trend analysis
 
 
-### Phase 4: Enterprise Features
+#### 2. Advanced Features
 
-Data warehouse integration - BigQuery, Snowflake, Redshift
+a) Multi-store support - Manage multiple Shopify stores
 
-Custom AI models - Fine-tuned for specific industries
+b) Custom reporting - Save and schedule reports
 
-API marketplace - Third-party integrations
+c) Team collaboration - Share insights with team members
 
-White-label solution - Brandable for agencies
+d) Mobile app - iOS/Android companion apps
+
+
+### 3. Enterprise Features
+
+a) Data warehouse integration - BigQuery, Snowflake, Redshift
+
+b) Custom AI models - Fine-tuned for specific industries
+
+c) API marketplace - Third-party integrations
+
+d) White-label solution - Brandable for agencies
 
 ---
 
@@ -299,13 +303,13 @@ railway up"
 
 ### Option B: Render.com
 
-Create new Web Service
+a) Create new Web Service
 
-Connect GitHub repository
+b) Connect GitHub repository
 
-Set build command: pip install -r requirements.txt
+c) Set build command: pip install -r requirements.txt
 
-Set start command: cd main_api && python main.py
+d) Set start command: cd main_api && python main.py
 
 
 ### Option C: Docker Deployment
@@ -316,37 +320,65 @@ docker run -p 8000:8000 shopify-ai-analytics"
 
 ---
 
+## Working Model
+
+Shopify Test Dashboards
+1.
+<img width="1047" height="792" alt="image" src="https://github.com/user-attachments/assets/9a7ada89-a2b1-41a1-9d64-a220d764ee46" />
+
+2.
+<img width="979" height="830" alt="image" src="https://github.com/user-attachments/assets/4fb1a42c-6aeb-431a-b244-6ad1c2dc13f1" />
+
+3.
+<img width="958" height="838" alt="image" src="https://github.com/user-attachments/assets/81ce8004-3989-4da7-956a-39928bc1ecab" />
+
+4.
+<img width="954" height="841" alt="image" src="https://github.com/user-attachments/assets/424fc6e8-5e2f-4c31-9303-75021dd683cc" />
+
+5.
+<img width="955" height="848" alt="image" src="https://github.com/user-attachments/assets/eab07215-57f5-4ef5-b1f7-3c00e8229bb8" />
+
+
+Shopify Dashboard
+<img width="1777" height="844" alt="image" src="https://github.com/user-attachments/assets/870f6f00-0503-47ad-8829-7a7d373aa8d6" />
+
+Shopify Open AI Platform
+<img width="1780" height="838" alt="image" src="https://github.com/user-attachments/assets/34874f73-d119-46c2-b43c-641a61753d14" />
+
+---
+
 ## 🎯 Learning Objectives Achieved
 
-### Technical Skills Demonstrated:
+### 1. Technical Skills Demonstrated:
 
-✅ Microservices Architecture: 3 independent services communicating via HTTP
+a)  Microservices Architecture: 3 independent services communicating via HTTP
 
-✅ AI Integration: Real OpenAI API usage with proper error handling
+b) AI Integration: Real OpenAI API usage with proper error handling
 
-✅ API Design: RESTful endpoints with proper validation
+c) API Design: RESTful endpoints with proper validation
 
-✅ Frontend Development: Responsive UI with real-time updates
+d) Frontend Development: Responsive UI with real-time updates
 
-✅ System Integration: Coordinating multiple services
+e) System Integration: Coordinating multiple services
 
-✅ Deployment Readiness: Production configuration files included
-
-
-### Business Understanding Demonstrated:
-
-✅ Shopify Ecosystem: Understanding of Shopify data structure
-
-✅ Business Intelligence: Translating data into actionable insights
-
-✅ User Experience: Intuitive interface for non-technical users
-
-✅ Scalability Planning: Clear path from prototype to production
+f) Deployment Readiness: Production configuration files included
 
 
-### 📝 License & Attribution
+### 2. Business Understanding Demonstrated:
 
-#### This project is developed as a demonstration of AI-powered analytics integration with Shopify. It uses:
+a) Shopify Ecosystem: Understanding of Shopify data structure
+
+b) Business Intelligence: Translating data into actionable insights
+
+c) User Experience: Intuitive interface for non-technical users
+
+d) Scalability Planning: Clear path from prototype to production
+
+---
+
+## 📝 License & Attribution
+
+### This project is developed as a demonstration of AI-powered analytics integration with Shopify. It uses:
 
 1. OpenAI GPT-3.5 Turbo for natural language processing
 
@@ -355,7 +387,7 @@ docker run -p 8000:8000 shopify-ai-analytics"
 3. Mock data for demonstration purposes
 
 
-#### For production use, replace mock layers with:
+### For production use, replace mock layers with:
 
 1. Real Shopify API with proper OAuth authentication
 
@@ -396,4 +428,5 @@ This project successfully demonstrates a complete AI-powered analytics platform 
 The system is production-ready with mock layers that can be directly swapped for real implementations, demonstrating both technical skill and strategic planning for scalability.
 
 ---
+
 
